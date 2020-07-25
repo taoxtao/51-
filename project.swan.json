@@ -1,0 +1,25 @@
+{
+    "appid": "21363154",
+    "compilation-args": {
+        "common": {
+            "enhance": true,
+            "imgCompress": true
+        },
+        "options": [],
+        "selected": -1
+    },
+    "host": "baiduboxapp",
+    "preview": {
+        "packageId": 765546
+    },
+    "projectname": "51看图",
+    "setting": {
+        "urlCheck": false
+    },
+    "swan": {
+        "baiduboxapp": {
+            "extensionJsVersion": "1.10.4",
+            "swanJsVersion": "3.150.11"
+        }
+    }
+}

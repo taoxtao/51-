@@ -1,0 +1,55 @@
+{
+    "name": "smt-refresh",
+    "label": "刷新",
+    "description": "可用于页面任意区域；使用时需自行添加下拉逻辑改变offset-y参数；smt-feed组件对smt-refresh进行了封装，支持手势交互和api调起刷新。",
+    "codeSnap": "<smt-refresh offset-y=\"{{0}}\" status=\"{{1}}\" text=\"为你推荐15条更新\"></smt-refresh>",
+    "fragement": "swanide://fragment/598510a21b650b89e2e5d13c814dc46c1577192328823",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-refresh/smt-refresh",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-refresh/smt-refresh",
+    "demoCode": {
+        "s": "<!-- 刷新：不包含手势交互，需通过改变offset-y和status自定义交互 -->\n<smt-refresh status=\"{{status}}\" offset-y=\"{{offsetY}}\" text=\"为您推荐xx条更新\"></smt-refresh>\n\n<!-- 信息流：包含手势交互 -->\n<smt-feed\n    class=\"smt-feed\"\n    theme=\"{{dark ? 'dark' : ''}}\"\n    pull-to-refresh\n    bind:refresh=\"onRefresh\"\n    text=\"{{text}}\"\n>\n    <list list=\"{{list}}\" theme=\"{{dark ? 'dark' : ''}}\"></list>\n</smt-feed>",
+        "js": "async onRefresh() {\n    console.log('触发 onRefresh');\n    const refresh = await selComponent(this, '.pull-down-refresh');\n    const {code, data: list} = await this.fetchData();\n    if (code !== 0) {\n        swan.showToast({title: '网络错误', mask: true, icon: 'none'});\n        refresh.closeLoading();\n        return;\n    }\n    await syncSetData(this, {\n        status: 1,\n        list: list || this.data.list,\n        text: list ? `本次共加载${list.length}条数据！` : '暂时没有更新，休息一下'\n    });\n    refresh.stopRefresh();\n}",
+        "css": ".smt-feed {\n    height: 3.51rem;\n    display: block;\n    background-color: #fff;\n}"
+    },
+    "properties": {
+        "attributes": [
+            {
+                "name": "theme",
+                "type": "String",
+                "description": "主题配置，默认浅色；深色主题请指定dark",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "loadingHgt",
+                "type": "Number",
+                "description": "加载区域高度",
+                "required": "否",
+                "default": "192px（需转换为设备尺寸）"
+            },
+            {
+                "name": "offsetY",
+                "type": "Number",
+                "description": "垂直移动距离，*建议后续在sjs中使用",
+                "required": "否",
+                "default": "0"
+            },
+            {
+                "name": "status",
+                "type": "Number",
+                "description": "加载状态 0: 未开始 1: 加载中 2: 展示话术",
+                "required": "否",
+                "default": "0"
+            },
+            {
+                "name": "text",
+                "type": "String",
+                "description": "加载成功时的展示话术",
+                "required": "否",
+                "default": "建议最多显示18个汉字，超出内容截断"
+            }
+        ],
+        "events": []
+    }
+}

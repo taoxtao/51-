@@ -1,0 +1,84 @@
+{
+    "name": "smt-page-status",
+    "label": "页面状态组件",
+    "description": "页面状态组件，可用于全屏和半屏。用于展示页面加载，页面异常-有操作、页面异常-无操作三种页面状态。",
+    "codeSnap": "<smt-page-status></smt-page-status>",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-page-status/smt-page-status",
+    "fragment": "swanide://fragment/4cc92982287ac8a30b5fe19f220dc8f71577190736077",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-page-status/smt-page-status",
+    "demoCode": {
+        "s": "<smt-page-status \n    class=\"content\"\n    loading=\"{{loading}}\"\n    title=\"网络不给力，请稍后再试\" >\n</smt-page-status>",
+        "js": "Page({\n    data: {\n        loading: false\n    },\n    reloading() {\n        this.setData({loading: true});\n        setTimeout(() => {\n            this.setData(\n                {loading: false},\n            );\n        }, 3000);\n    }\n});",
+        "css": ".content {\n    width: 100%;\n    height: 100vh;\n}"
+    },
+    "properties": {
+        "attributes": [
+            {
+                "name": "theme",
+                "type": "String",
+                "description": "主题配置，默认浅色；沉浸式主题请指定dark",
+                "required": "否",
+                "default": ""
+            },
+            {
+                "name": "loading",
+                "type": "Boolean",
+                "description": "页面状态配置，默认不展示加载状态页面",
+                "required": "否",
+                "default": "false"
+            },
+            {
+                "name": "icon",
+                "type": "String",
+                "description": "空态/缺省页面下的图标名称",
+                "required": "否",
+                "default": "content"
+            },
+            {
+                "name": "loadingTitle",
+                "type": "String",
+                "description": "加载页面下的标题文案",
+                "required": "否",
+                "default": "正在加载..."
+            },
+            {
+                "name": "title",
+                "type": "String",
+                "description": "空态/缺省页面下的标题文案",
+                "required": "否",
+                "default": "单行标题"
+            },
+            {
+                "name": "desc",
+                "type": "String",
+                "description": "空态/缺省页面下的描述文案",
+                "required": "否",
+                "default": ""
+            },
+            {
+                "name": "showBtn",
+                "type": "Boolean",
+                "description": "是否展示空态/缺省页面下的操作按钮，默认展示",
+                "required": "否",
+                "default": "true"
+            },
+            {
+                "name": "btnText",
+                "type": "String",
+                "description": "空态/缺省页面下，操作按钮的描述文案,建议最多显示4个汉字，超出内容截断",
+                "required": "否",
+                "default": "重新加载"
+            }
+        ],
+        "events": [
+            {
+                "name": "reloading",
+                "type": "Event",
+                "description": "空态/缺省页面下，点击操作按钮时触发",
+                "required": "否",
+                "default": "-"
+            }
+        ]
+    }
+}

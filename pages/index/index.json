@@ -1,0 +1,11 @@
+{
+    "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "51看图",
+        "backgroundTextStyle": "light",
+        "navigationStyle": "custom",
+    "usingComponents": {
+        "smt-search-bar": "../../@smt-ui/component/src/search-bar/src/index"
+
+    }
+}

@@ -1,0 +1,124 @@
+{
+    "name": "smt-navigation",
+    "label": "顶部导航bar",
+    "autoReadme": true,
+    "description": "顶部自定义的导航栏，其中不包含界面，仅仅是限制了开发者写顶部bar内容的区域，使之在安全区内完成顶部内容的渲染；支持配置返回首页、上一页按钮，和滑动切换效果主题",
+    "codeSnap": "<smt-navigation></smt-navigation>",
+    "fragement": "swanide://fragment/2cb7a3d38f1df3854fc5cabb679654771587898970846",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-navigation/smt-navigation",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-navigation/smt-navigation",
+    "demoCode": {
+        "s": "<view class=\"wrap\">\n    <image class=\"iphone-image-area\"  \n        mode=\"widthFix\" \n        src=\"{{showSwicthNav ? iphoneGifSrc : iphoneImgSrc}}\"\n    />\n    <image class=\"status-image-area {{showSwicthNav ? 'hide' : ''}}\"  \n        mode=\"widthFix\" \n        src=\"{{statusImgSrc}}\"\n    />\n    <smt-navigation \n        navigation-style=\"{{navigationStyle}}\"\n        navigation-area-style=\"{{navigationAreaStyle}}\"\n        back-icon=\"{{backIcon}}\"\n        home-icon=\"{{homeIcon}}\"\n        front-color=\"#fff\"\n        bindbackHdl=\"backHdl\"\n        bindhomeHdl=\"homeHdl\"\n        backgroundColor=\"transparent\">\n        <view class=\"navigation-content-area {{showTitle ? '' : 'hide'}}\">\n            <text class=\"navigation-title\">{{title}}</text>\n            <text class=\"navigation-desc\">{{desc}}</text>\n        </view>\n    </smt-navigation>\n    <view class=\"btns-area\">\n        <button s-for=\"item,index in btnsList\"\n            type=\"primary\"\n            data-type=\"{{item.type}}\"\n            data-index=\"{{index}}\"\n            disabled=\"{{item.disabled}}\"\n            hover-stop-propagation=\"true\"\n            bind:tap=\"tapHdl\">\n            {{item.text}}\n        </button>\n    </view>\n</view>",
+        "css": ".wrap {\n    height: 100%;\n    padding: 0;\n    background: #f5f5f5;\n}\n\n.hide {\n    opacity: 0;\n}\n\n.header-content-custom {\n    display: flex;\n    width: 100%;\n    height: 100%;\n    align-items: center;\n    justify-content: space-between;\n}\n.header-content-area {\n    height: 100%;\n    flex: 1;\n    box-sizing: border-box;\n}\n.wrap .smt-card-area {\n    margin: 25.362rpx 0 72.464rpx;\n    background: #fff;\n}\n.wrap .area-content {\n    height: 635.87rpx;\n}\n\n.header-content-subtitle {\n    z-index: 99;\n    display: block;\n    font-size: .13rem;\n    color: #999;\n}\n\n.wrap .item-logo {\n    display: inline-block;\n    width: 32.609rpx;\n    height: 32.609rpx;\n    margin: 34.005rpx 0;\n}\n.page-status-hover {\n    opacity: .2;\n}\n\n.iphone-image-area {\n    width: 702.9rpx;\n    height: 580.92rpx;\n    margin: 22.34rpx 23.55rpx;\n}\n\n.status-image-area {\n    width: 661.84rpx;\n    position: relative;\n    top: -766rpx;\n    left: 44rpx;\n}\n\n.btns-area {\n    /* position: relative;\n    top: 362.32rpx; */\n    position: fixed;\n    width: 100%;\n    bottom: 18.12rpx;\n    background: #f5f5f5;;\n    padding-top: 12.08rpx;\n}\n\n.navigation-content-area {\n    width: 100%;\n    margin-left: 20%;\n}\n\n.navigation-desc {\n    font-size: 23.55rpx;\n}\n\n.navigation-title,\n.navigation-desc {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: opacity .5;\n}\n\n.navigation-desc {\n    opacity: .6;\n}",
+        "js": "Page({\n    data: {\n        homeIcon: false,\n        backIcon: false,\n        btnsList: [{\n            type: 'back',\n            text: '显示\"返回上一页\"按钮'\n        }, {\n            type: 'home',\n            text: '显示\"返回首页\"按钮'\n        }, {\n            type: 'both',\n            text: '显示\"返回上一页&返回首页\"按钮'\n        }, {\n            type: 'switch',\n            text: '点击演示上滑页面导航变色'\n        }, {\n            type: 'reset',\n            text: '重置'\n        }],\n        iphoneImgSrc: 'https://b.bdstatic.com/miniapp/images/simulator.png',\n        iphoneGifSrc: 'https://b.bdstatic.com/miniapp/images/simulator.gif',\n        statusImgSrc: 'https://b.bdstatic.com/miniapp/images/smt_status.png',\n        navigationStyle: {\n            'position': 'relative',\n            'margin-top': '-836rpx',\n            'padding': '0 0 0 30.19rpx',\n            'height': '30px',\n            'width': '100%'\n        },\n        navigationAreaStyle: {\n            height: '45px'\n        }\n    },\n\n    /**\n     * 点击返回上一级按钮\n     *\n     */\n    backHdl() {\n        this.changeNavHdl('上一页面');\n\n    },\n\n    /**\n     * 点击返回首页按钮\n     *\n     */\n    homeHdl() {\n        this.changeNavHdl('小程序首页');\n    },\n\n    /**\n     * 切换模拟器公共方法\n     *\n     * @param {string} title 标题\n     * @param {string} desc 描述\n     * @param {boolean} backIcon 是否配置返回按钮\n     * @param {boolean} homeIcon 是否配置返回首页按钮\n     */\n    changeNavHdl(title) {\n        this.setData({\n            title,\n            desc: 'detail',\n            backIcon: false,\n            homeIcon: false\n        });\n        setTimeout(() => {\n            this.setData({\n                showTitle: true\n            });\n        }, 300);\n    },\n\n    /**\n     * 点击按钮触发\n     *\n     * @param {Event} e 事件对象\n     * @param {Object} e.currentTarget.dataset 该按钮的数据对象\n     */\n    tapHdl(e) {\n        const {type, index} = e.currentTarget.dataset;\n        const homeIcon = /home|both/.test(type);\n        const backIcon = /back|both/.test(type);\n\n        this.setData({\n            title: '',\n            desc: '',\n            homeIcon,\n            backIcon,\n            showTitle: false,\n            showSwicthNav: type === 'switch',\n            btnsList: this.data.btnsList.filter((btnVal, btnIndex) => {\n                if (type === 'reset') {\n                    btnVal.disabled = false;\n                }\n                else if (btnIndex === index) {\n                    btnVal.disabled = true;\n                }\n                return btnVal;\n            })\n        });\n    }\n});\n",
+        "json": "{\n    \"navigationBarTitleText\": \"icon\",\n    \"navigationStyle\": \"custom\",\n    \"backgroundColorTop\": \"#f5f5f5\",\n    \"backgroundColor\": \"#f5f5f5\",\n    \"usingComponents\": {\n        \"smt-navigation\": \"@smt-ui/component/src/navigation\",\n        \"smt-icon\": \"@smt-ui/component/src/icon\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "backgroundColor",
+            "type": "string",
+            "description": "导航背景色",
+            "required": "否",
+            "default": "#fff"
+        },
+        {
+            "name": "frontColor",
+            "type": "string",
+            "description": "前景颜色（目前特指字体颜色）",
+            "required": "否",
+            "default": "#000"
+        },
+        {
+            "name": "opacity",
+            "type": "Number",
+            "description": "导航背景透明度",
+            "required": "否",
+            "default": 1
+        },
+        {
+            "name": "navigationStyle",
+            "type": "Object",
+            "description": "导航容器自定义样式（加在行间样式上）",
+            "required": "否",
+            "default": "{}"
+        },
+        {
+            "name": "navigationAreaStyle",
+            "type": "Object",
+            "description": "导航内容可视区自定义样式（加在行间样式上）",
+            "required": "否",
+            "default": "{}"
+        },
+        {
+            "name": "type",
+            "type": "String",
+            "description": "自定义导航类型：default为默认，switchNav为切换导航栏模式",
+            "required": "否",
+            "default": "default"
+        },
+        {
+            "name": "backIcon",
+            "type": "Boolean",
+            "description": "是否显示返回图标",
+            "required": "否",
+            "default": false
+        },
+        {
+            "name": "homeIcon",
+            "type": "Boolean",
+            "description": "是否显示首页图标",
+            "required": "否",
+            "default": false
+        },
+        {
+            "name": "switchStartPosition",
+            "type": "Number",
+            "description": "切换模式下，导航栏起始位置，默认状态栏的高度",
+            "required": "否",
+            "default": "statusBarHeight（计算得来的默认状态栏的高度）"
+        },
+        {
+            "name": "switchEndPosition",
+            "type": "Number",
+            "description": "切换模式下，是否隐藏顶部",
+            "required": "否",
+            "default": 100
+        },
+        {
+            "name": "commonBar",
+            "type": "Object",
+            "description": "切换模式下，初始的导航样式",
+            "required": "否",
+            "default": "{'opacity':1,'title':’','frontColor':'#000','bgColor':'#fff','backIcon':true,'homeIcon':false,'navigationStyle':{},'navigationAreaStyle':{}}"
+        },
+        {
+            "name": "fixedBar",
+            "type": "Object",
+            "description": "切换模式下，滚动后的导航样式",
+            "required": "否",
+            "default": "{'opacity':1,'title':'fixed','frontColor':'#000','bgColor':'pink','backIcon':true,'homeIcon':false,'navigationStyle':{},'navigationAreaStyle':{}}"
+        }, {
+            "name": "homeIconSize",
+            "type": "String",
+            "value": "35.02rpx"
+        },{
+            "name": "backIconSize",
+            "type": "String",
+            "value": "35.02rpx"
+        }],
+        "events": [{
+            "name": "bindbackHdl",
+            "type": "Event",
+            "description": "点击返回按钮触发事件",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindhomeHdl",
+            "type": "Event",
+            "description": "点击返回首页触发事件",
+            "required": "否",
+            "default": "-"
+        }]
+    }
+}

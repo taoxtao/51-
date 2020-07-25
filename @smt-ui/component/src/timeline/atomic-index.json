@@ -1,0 +1,83 @@
+{
+    "name": "smt-timeline",
+    "label": "时间轴",
+    "autoReadme": true,
+    "description": "时间轴组件，可配置时间轴内容，时间轴状态以及自定义图标。适用于信息展示，并可放置在页面的任何位置。",
+    "codeSnap": "<smt-timeline\n    status=\"wait\"\n    title=\"2019-10-15 10:15\"\n    desc=\"状态：进行中\"\n>\n    当前状态详情描述\n</smt-timeline>",
+    "fragement": "swanide://fragment/24a16d632b8ecac85f68494360571d711594093134704",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-timeline/smt-timeline",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-timeline/smt-timeline",
+    "demoCode": {
+        "s": "<view class=\"wrap\">\n    <view class=\"content\">\n        <view class=\"card-panel\">\n            <view class=\"mode-title\">\n                <view class=\"mode-title-line-left\"></view>\n                <view class=\"mode-title-text\">单条信息样式</view>\n                <view class=\"mode-title-line-right\"></view>\n            </view>\n            <view class=\"comp-wrap\">\n                <smt-timeline\n                    s-for=\"item, index in options\"\n                    status=\"{{item.status}}\"\n                    title=\"{{item.title}}\"\n                    desc=\"{{item.desc}}\"\n                    has-tail=\"{{item.hasTail}}\"\n                    icon-color=\"{{item.iconColor}}\"\n                    timeline-class=\"comp-timeline\"\n                    desc-style=\"\n                        {{index === options.length - 1 ? 'font-weight: 700;' : ''}}\n                        {{item.status === 'error' ? 'color: #f7534f' : ''}}\n                    \"\n                >\n                    {{item.info}}\n                </smt-timeline>\n            </view>\n        </view>\n        <view class=\"card-panel\">\n            <view class=\"mode-title\">\n                <view class=\"mode-title-line-left\"></view>\n                <view class=\"mode-title-text\">多条信息样式</view>\n                <view class=\"mode-title-line-right\"></view>\n            </view>\n            <view class=\"comp-wrap\">\n                <smt-timeline\n                    s-for=\"item, index in options2\"\n                    status=\"{{item.status}}\"\n                    desc=\"{{item.desc}}\"\n                    has-tail=\"{{item.hasTail}}\"\n                    icon-color=\"{{item.iconColor}}\"\n                    timeline-class=\"comp-timeline\"\n                    desc-style=\"{{\n                        index === options.length - 1\n                        ? 'font-weight: 700;'\n                        : ''\n                    }}\"\n                >\n                    <view\n                        class=\"comp-info-wrap\"\n                        s-for=\"descInfo in item.descInfo\"\n                    >\n                        <view class=\"comp-info\">\n                            {{descInfo.info}}\n                        </view>\n                        <view class=\"comp-title\">\n                            {{descInfo.title}}\n                        </view>\n                    </view>\n                </smt-timeline>\n            </view>\n        </view>\n    </view>\n</view>",
+        "css": ".wrap {\n    background-color: #f5f5f5;\n    transition: background-color 200ms linear;\n}\n\n.content {\n    padding-top: .2rem;\n}\n\n.smt-card-area {\n    margin-top: 25.36rpx;\n    background-color: #fff;\n}\n\n.card-panel {\n    margin-top: 72.46rpx;\n}\n\n.card-panel:first-child {\n    margin-top: 0;\n}\n\n.card-area {\n    display: flex;\n    margin: 90.58rpx 0 0;\n    padding: 28.382rpx 30.797rpx;\n    border: none;\n    border-radius: 0;\n    transition: background-color 200ms linear;\n    align-items: center;\n    justify-content: space-between;\n}\n\n.comp-wrap {\n    margin-top: 25.362rpx;\n    padding: 38.043rpx 30.797rpx 0;\n    background-color: #fff;\n}\n\n.comp-last-content {\n    padding-bottom: 0;\n}\n\n.comp-info-wrap {\n    margin-bottom: 36.232rpx;\n}\n\n.comp-info-wrap:last-child {\n    margin-bottom: 0;\n}\n\n.comp-title {\n    margin-top: 10.87rpx;\n    color: #999;\n}\n\n.comp-timeline {\n    padding: 0 !important;\n}",
+        "js": "Page({\n    data: {\n        options: [\n            {\n                title: '2019-10-15 15:29:06',\n                desc: '状态：进行中',\n                info: '当前状态详情描述',\n                status: 'wait',\n                hasTail: true,\n                iconColor: '#2772fb'\n            },\n            {\n                title: '2019-10-15 15:29:06',\n                desc: '状态：成功/通过',\n                info: '当前状态详情描述',\n                status: 'success',\n                hasTail: true,\n                iconColor: '#2772fb'\n            },\n            {\n                title: '2019-10-15 15:29:06',\n                desc: '状态：失败/未通过',\n                info: '当前状态详情描述',\n                status: 'error',\n                iconColor: '#f7534f'\n            }\n        ],\n        options2: [\n            {\n                status: 'wait',\n                desc: '状态：进行中',\n                hasTail: true,\n                iconColor: '#2772fb',\n                descInfo: [\n                    {\n                        info: '当前状态详情描述',\n                        title: '2019-10-15 15:29:06'\n                    },\n                    {\n                        info: '当前状态详情描述',\n                        title: '2019-10-15 15:29:06'\n                    }\n                ]\n            },\n            {\n                status: 'success',\n                desc: '状态：成功/通过',\n                hasTail: true,\n                iconColor: '#2772fb',\n                descInfo: [\n                    {\n                        info: '当前状态详情描述',\n                        title: '2019-10-15 15:29:06'\n                    },\n                    {\n                        info: '当前状态详情描述',\n                        title: '2019-10-15 15:29:06'\n                    }\n                ]\n            },\n            {\n                status: 'success',\n                desc: '已办结',\n                iconColor: '#2772fb',\n                descInfo: [\n                    {\n                        info: '当前状态详情描述',\n                        title: '2019-10-15 15:29:06'\n                    },\n                    {\n                        info: '当前状态详情描述',\n                        title: '2019-10-15 15:29:06'\n                    }\n                ]\n            }\n        ]\n    }\n});",
+        "json": "{\n    \"navigationBarTitleText\": \"时间轴\",\n    \"navigationStyle\": \"default\",\n    \"usingComponents\": {\n        \"smt-timeline\": \"@smt-ui/component/src/timeline\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "status",
+            "type": "String",
+            "description": "时间轴状态，类型包括：wait、finished、success、error，每个类型对应不同的icon图标以及时间轴展现样式",
+            "required": "否",
+            "default": "wait"
+        },
+        {
+            "name": "title",
+            "type": "String",
+            "description": "时间轴标题",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "desc",
+            "type": "String",
+            "description": "时间轴副标题",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "descStyle",
+            "type": "String",
+            "description": "时间轴副标题样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "icon",
+            "type": "String",
+            "description": "自定义icon名称",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "iconColor",
+            "type": "String",
+            "description": "自定义icon颜色",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "timeline-class",
+            "type": "String",
+            "description": "提供时间轴的扩展样式类，供开发者自定义组件样式，可通过此class改变时间轴外层样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "item-tail-class",
+            "type": "String",
+            "description": "提供时间轴的扩展样式类，供开发者自定义组件样式，可通过此class改变时间轴轴线样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "content-title-class",
+            "type": "String",
+            "description": "提供时间轴的扩展样式类，供开发者自定义组件样式，可通过此class改变时间轴标题样式",
+            "required": "否",
+            "default": "-"
+        }],
+        "events": []
+    }
+}

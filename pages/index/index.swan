@@ -1,0 +1,37 @@
+<!-- index.swan -->
+<view class="container">
+<view class="nav-title" style="margin-top:{{rightMenuInfo.top}}px;height:{{rightMenuInfo.height}}px;line-height:{{rightMenuInfo.height}}px;">51看图</view>
+	<view class="search">
+		<smt-search-bar class="area-content" searchIconColor="{{searchIconColor}}"
+			search-bar-class="{{theme}}-external-container" search-bar-content-class="{{theme}}-external-content"
+			search-icon-class="{{theme}}-external-icon" search-input-class="external-search-input"
+			search-text-class="external-search-text" placeholder-style="{{placeholderStyle}}" theme="{{theme}}" />
+	</view>
+	<view class="content">
+		<view class="view-li" s-for="{{lists}}" s-key="item.id">
+			<image class="img"  mode="widthFix" data-index="{{index}}" bindtap="viewImgs" lazy-load  
+				 src="{{item.img[0]}}" />
+                <text class="title">{{item.title}}</text>
+		</view>
+	</view>
+    <view s-if="{{isShow}}" class="swiper-wrap">
+        <swiper 
+            class="swiper"
+            indicator-dots="{{indicatorDots}}"
+            indicator-color="white"
+            indicator-active-color="red"
+            autoplay="false"
+            current="{{swiperCurrent}}" 
+            bindchange="swiperChange"   
+            bindtap="hiddenShow"
+            circular="false">
+            <swiper-item s-for="{{imgs}}">
+                <image style="width:100%;"  mode="widthFix" src="{{item}}"/>
+            </swiper-item>
+        </swiper>
+        <view s-if="{{isIos}}" class="dots">
+        <view s-for="{{imgs}}" class="dot {{index == swiperCurrent ? ' active' : ''}}"></view>
+    </view>
+        </view>
+        
+</view>

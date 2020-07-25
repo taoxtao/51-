@@ -1,0 +1,83 @@
+{
+    "name": "smt-notice-bar",
+    "label": "跑马灯",
+    "autoReadme": true,
+    "description": "跑马灯组件，可配置跑马灯内容，跑马灯样式，跑马灯滚动状态以及滚动配置。适用于提示引导，并可放置在页面的任何位置。",
+    "codeSnap": "<smt-notice-bar bg-color=\"#fef5ef\" text=\"跑马灯内容跑马灯内容跑马灯内容\"></smt-notice-bar>\n",
+    "fragement": "swanide://fragment/02ef280dc8ce2803708667addd89c8c71594094545674",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-notice-bar/smt-notice-bar",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-notice-bar/smt-notice-bar",
+    "demoCode": {
+        "s": "<view class=\"wrap\">\n    <view class=\"content\">\n        <view class=\"card-panel\">\n            <view class=\"mode-title\">\n                <view class=\"mode-title-line-left\"></view>\n                <view class=\"mode-title-text\">默认样式</view>\n                <view class=\"mode-title-line-right\"></view>\n            </view>\n            <view class=\"comp-wrap\">\n                <smt-notice-bar bg-color=\"#fef5ef\" text=\"{{noticeBarText}}\"></smt-notice-bar>\n            </view>\n        </view>\n        <view class=\"card-panel\">\n            <view class=\"mode-title\">\n                <view class=\"mode-title-line-left\"></view>\n                <view class=\"mode-title-text\">可配样式</view>\n                <view class=\"mode-title-line-right\"></view>\n            </view>\n            <view class=\"comp-wrap\">\n                <smt-notice-bar\n                    text=\"{{noticeBarText2}}\"\n                    icon-color=\"#fff\"\n                    notice-bar-class=\"comp-notice-bar\"\n                    text-class=\"comp-notice-bar-text\"\n                >\n                </smt-notice-bar>\n            </view>\n        </view>\n    </view>\n</view>",
+        "css": ".wrap {\n    height: 100vh;\n    background-color: #f5f5f5;\n}\n\n.content {\n    padding-top: .2rem;\n}\n\n.smt-card-area {\n    margin-top: 25.36rpx;\n    background-color: #fff;\n}\n\n.card-panel {\n    margin-top: 72.46rpx;\n}\n\n.card-panel:first-child {\n    margin-top: 0;\n}\n\n.card-area {\n    display: flex;\n    margin: 90.58rpx 0 0;\n    padding: 28.382rpx 30.797rpx;\n    border: none;\n    border-radius: 0;\n    transition: background-color 200ms linear;\n    align-items: center;\n    justify-content: space-between;\n}\n\n.comp-wrap {\n    margin-top: 25.362rpx;\n}\n\n.comp-last-content {\n    padding-bottom: 0;\n}\n\n.comp-info-wrap {\n    margin-bottom: 36.232rpx;\n}\n\n.comp-info-wrap:last-child {\n    margin-bottom: 0;\n}\n\n.comp-title {\n    margin-top: 10.87rpx;\n    color: #999;\n}\n\n.comp-notice-bar {\n    background-color: #679cfc !important;\n}\n\n.comp-notice-bar-text {\n    color: #fff;\n}",
+        "js": "Page({\n    data: {\n        noticeBarText: '跑马灯内容跑马灯内容跑马灯内容跑马灯内跑马灯内容跑马灯内容跑马灯内容跑马灯内',\n        noticeBarText2: '跑马灯内容跑马灯内容跑马灯内容'\n    }\n});",
+        "json": "{\n    \"navigationBarTitleText\": \"跑马灯\",\n    \"navigationStyle\": \"default\",\n    \"usingComponents\": {\n        \"smt-notice-bar\": \"@smt-ui/component/src/notice-bar\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "text",
+            "type": "String",
+            "description": "跑马灯文本",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "icon",
+            "type": "Boolean",
+            "description": "是否展示跑马灯尾部icon图标",
+            "required": "否",
+            "default": "true"
+        },
+        {
+            "name": "iconName",
+            "type": "String",
+            "description": "展示的icon图标名称",
+            "required": "否",
+            "default": "delete"
+        },
+        {
+            "name": "iconColor",
+            "type": "String",
+            "description": "展示的icon图标颜色",
+            "required": "否",
+            "default": "#fa6400"
+        },
+        {
+            "name": "scroll",
+            "type": "Boolean",
+            "description": "跑马灯是否滚动",
+            "required": "否",
+            "default": "true"
+        },
+        {
+            "name": "delay",
+            "type": "Number",
+            "description": "跑马灯滚动延时时间",
+            "required": "否",
+            "default": "1"
+        },
+        {
+            "name": "speed",
+            "type": "Number",
+            "description": "跑马灯每秒滚动速度",
+            "required": "否",
+            "default": "50"
+        },
+        {
+            "name": "notice-bar-class",
+            "type": "String",
+            "description": "提供跑马灯的扩展样式类，供开发者自定义组件样式，可通过此class改变跑马灯外层样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "text-class",
+            "type": "String",
+            "description": "提供跑马灯的扩展样式类，供开发者自定义组件样式，可通过此class改变跑马灯文本样式",
+            "required": "否",
+            "default": "-"
+        }],
+        "events": []
+    }
+}

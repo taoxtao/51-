@@ -1,0 +1,147 @@
+{
+    "name": "smt-feed",
+    "label": "信息流",
+    "description": "信息流组件，可配置下拉刷新、列表加载、上滑加载功能，适用于列表信息展示，并可放置在页面的任何部分；组件包含手势下拉以及api调用两种使用方式\n* 注意：\n1. 和scroll-view一样，信息流组件作为局部滚动组件，必须在它的父级或本身指定高度\n2. 当同时启用下拉刷新和上滑加载且请求不稳定时，可使用CancelToken取消先前的请求",
+    "codeSnap": "<smt-feed pull-to-refresh><view>list</view></smt-feed>",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-feed/smt-feed",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-feed/smt-feed",
+    "demoCode": {
+        "s": "<!-- 手势下拉刷新 & 触底加载 -->\n<smt-feed\n    class=\"smt-feed pull-down-refresh\"\n    pull-to-refresh\n    bind:refresh=\"onRefresh\"\n    bind:scrolltolower=\"scrollToLower\"\n    text=\"{{PullText}}\"\n>\n    <list list=\"{{list}}\"></list>\n    <smt-spin status=\"{{status}}\" bind:tap=\"reload\"></smt-spin>\n</smt-feed>",
+        "js": "async onRefresh() {\n    const refresh = await selComponent(this, '.pull-down-refresh');\n    const {data: list} = await fetchData();\n    await syncSetData(this, {\n        status: 1,\n        count: 0,\n        list: list || this.data.list,\n        text: list ? `为你推荐${list.length}条更新` : '暂时没有更新，休息一下'\n    });\n    refresh.stopRefresh();\n},\n\nasync scrollToLower() {\n    const {data: list} = await fetchData();\n    const fail = this.data.count === 3;\n    const end = this.data.count === 5;\n    if (fail || end) {\n        this.setData({\n            status: fail ? 3 : 2\n        });\n        return;\n    }\n    await syncSetData(this, {\n        list: list.concat(this.data.list || []),\n        count: ++this.data.count\n    });\n}",
+        "css": ".smt-feed {\n    display: block;\n    height: calc(100vh - 40px);\n}"
+    },
+    "fragement": "swanide://fragment/7b9bf19d0c974d45d9b68fd9fc4429b31577200628346",
+    "properties": {
+        "attributes": [
+            {
+                "name": "theme",
+                "type": "String",
+                "description": "主题配置，默认浅色；深色主题请指定dark",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "loadingHeight",
+                "type": "Number",
+                "description": "加载、话术区域高度，单位为设备px，转换方法: import {upx2dpx} from '@smt-ui/component/src/common/utils/px';",
+                "required": "否",
+                "default": "192px(设计稿宽度为1242)"
+            },
+            {
+                "name": "pullToRefresh",
+                "type": "Boolean",
+                "description": "是否开启手势下拉刷新; 默认只能通过组件api调起",
+                "required": "否",
+                "default": "false"
+            },
+            {
+                "name": "lowerThreshold",
+                "type": "Number",
+                "description": "触发scrolltolower事件的阈值",
+                "required": "否",
+                "default": "150px（设备上的px）"
+            },
+            {
+                "name": "text",
+                "type": "String",
+                "description": "加载成功时的展示话术",
+                "required": "否",
+                "default": "建议最多显示18个汉字，超出内容截断"
+            },
+            {
+                "name": "refresh",
+                "type": "EventHandle",
+                "description": "手势滑动触发加载时，响应该onRefresh事件; 通过调用api加载，不会触发该事件",
+                "required": "否",
+                "default": ""
+            },
+            {
+                "name": "startRefresh",
+                "type": "EventHandle",
+                "description": "手动调用该api，触发加载",
+                "required": "否",
+                "default": ""
+            },
+            {
+                "name": "stopRefresh",
+                "type": "EventHandle",
+                "description": "手动调用该api，停止加载，并弹出加载提示（对应属性text）；可使用await等待关闭动画结束",
+                "required": "否",
+                "default": ""
+            },
+            {
+                "name": "closeLoading",
+                "type": "EventHandle",
+                "description": "手动调用该api，立即关闭加载，不弹出加载提示；例如接口异常，建义直接关闭加载（小球交替一次大约为500ms，调用前可加延时避免关闭太快）",
+                "required": "否",
+                "default": ""
+            },
+            {
+                "name": "smt-feed-container",
+                "type": "externalClass",
+                "description": "组件整体class名",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "smt-feed-loading",
+                "type": "externalClass",
+                "description": "加载区域class名",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "smt-feed-content",
+                "type": "externalClass",
+                "description": "滚动区域class名，用于设置ios回弹背景",
+                "required": "false",
+                "default": ""
+            },
+            {
+                "name": "smt-refresh-circle-left",
+                "type": "externalClass",
+                "description": "加载中左侧小球class名",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "smt-refresh-circle-right",
+                "type": "externalClass",
+                "description": "加载中右侧小球class名",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "ext-cls-content",
+                "type": "externalClass",
+                "description": "滚动区域class名",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "smt-refresh-result-container",
+                "type": "externalClass",
+                "description": "加载话术外框class名",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "ext-cls-result-text",
+                "type": "externalClass",
+                "description": "加载话术文字class名",
+                "required": "否",
+                "default": "-"
+            }
+        ],
+        "events": [
+            {
+                "name": "bindscroll",
+                "type": "Event",
+                "description": "滚动时触发，返回当前组件的值",
+                "required": "否",
+                "default": "-"
+            }
+        ]
+    }
+}

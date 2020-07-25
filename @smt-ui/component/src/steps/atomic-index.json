@@ -1,0 +1,69 @@
+{
+    "name": "smt-steps",
+    "label": "步骤条",
+    "autoReadme": true,
+    "description": "步骤条组件，可配置步骤条内容，步骤条状态，步骤条上限为8步。适用于信息输入，并可放置在页面的任何位置。",
+    "codeSnap": "<smt-steps\n    active=\"{{1}}\"\n    steps=\"{{[{text: '第一步'}]}}\"\n>\n</smt-steps>",
+    "fragement": "swanide://fragment/11a9354693b91525ad49e6aee61da0d51594093063438",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-steps/smt-steps",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-steps/smt-steps",
+    "demoCode": {
+        "s": "<view class=\"wrap\">\n    <view class=\"card-area\">\n        <view class=\"top-description border-bottom\">默认样式</view>\n        <view class=\"border-bottom\">\n            <smt-steps\n                active=\"{{stepsActive}}\"\n                line-style=\"solid\"\n                steps=\"{{steps}}\"\n                active-color=\"#2772fb\"\n                step-main-class=\"step-main\"\n            >\n            </smt-steps>\n        </view>\n        <button\n            bindtap=\"addStep\"\n            class=\"step-btn-cls\"\n            hover-stop-propagation=\"true\"\n            type=\"primary\"\n        >\n            点击按钮添加步骤\n        </button>\n    </view>\n    <view class=\"card-area\">\n        <view class=\"top-description border-bottom\">执行展示</view>\n        <view class=\"border-bottom\">\n            <smt-steps\n                active=\"{{fourStepsActive}}\"\n                line-style=\"solid\"\n                steps=\"{{fourSteps}}\"\n                active-color=\"#2772fb\"\n                step-main-class=\"step-main\"\n            >\n            </smt-steps>\n        </view>\n        <button\n            bindtap=\"changeActive\"\n            class=\"step-btn-cls\"\n            hover-stop-propagation=\"true\"\n            type=\"primary\"\n        >\n            点击按钮执行步骤\n        </button>\n    </view>\n</view>",
+        "css": ".wrap {\n    background-color: #f5f5f5;\n    height: 100vh;\n}\n\n.step-main {\n    display: flex;\n    justify-content: center;\n}\n\n.step-main view {\n    margin-left: 0 !important;\n}\n\n.step-btn-cls {\n    background-color: #2772fb !important;\n    color: #fff;\n}",
+        "js": "Page({\n    data: {\n        stepsActive: 2,\n        steps: [\n            {\n                text: '第1步'\n            },\n            {\n                text: '第2步'\n            }\n        ],\n        fourStepsActive: 2,\n        fourSteps: [\n            {\n                text: '第1步'\n            },\n            {\n                text: '第2步'\n            },\n            {\n                text: '第3步'\n            },\n            {\n                text: '第4步'\n            }\n        ]\n    },\n\n    /**\n     * 添加步骤条进度\n     */\n    addStep() {\n        const {stepsActive, steps} = this.data;\n        const len = steps.length;\n\n        if (len < 8) {\n            this.setData({\n                steps: [\n                    ...steps,\n                    {\n                        text: `第${len + 1}步`\n                    }\n                ],\n                stepsActive: stepsActive + 1\n            });\n        }\n        else {\n            this.showToast('步骤添加已到上限');\n        }\n    },\n\n    /**\n     * 展示提示\n     *\n     * @param {string} title 提示内容\n     */\n    showToast(title) {\n        swan.showToast({\n            title,\n            icon: 'none'\n        });\n    },\n\n    /**\n     * 执行步骤\n     */\n    changeActive() {\n        const {fourStepsActive, fourSteps} = this.data;\n        if (fourStepsActive < fourSteps.length) {\n            this.setData({\n                fourStepsActive: fourStepsActive + 1\n            });\n        }\n        else {\n            this.showToast('步骤已执行完成');\n        }\n    }\n});",
+        "json": "{\n    \"navigationBarTitleText\": \"步骤条\",\n    \"navigationStyle\": \"default\",\n    \"usingComponents\": {\n        \"smt-steps\": \"@smt-ui/component/src/steps\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "steps",
+            "type": "Array",
+            "description": "步骤条数据，最多支持8个步骤。steps示例：[{text: '标题文案标题文案标题文案'}, {text: '标题文案标题文案标题文案'}]，详细代码请阅读代码示例",
+            "required": "是",
+            "default": "-"
+        },
+        {
+            "name": "active",
+            "type": "Number",
+            "description": "当前步骤进度",
+            "required": "否",
+            "default": "1"
+        },
+        {
+            "name": "color",
+            "type": "String",
+            "description": "步骤条默认颜色",
+            "required": "否",
+            "default": "#ccc"
+        },
+        {
+            "name": "activeColor",
+            "type": "String",
+            "description": "当前进度步骤条颜色",
+            "required": "否",
+            "default": "#2b99ff"
+        },
+        {
+            "name": "steps-class",
+            "type": "String",
+            "description": "提供步骤条的扩展样式类，供开发者自定义组件样式，可通过此class改变步骤条外层样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "step-class",
+            "type": "String",
+            "description": "提供步骤条的扩展样式类，供开发者自定义组件样式，可通过此class改变步骤条内容样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "step-main-class",
+            "type": "String",
+            "description": "提供步骤条的扩展样式类，供开发者自定义组件样式，可通过此class改变步骤条文本样式",
+            "required": "否",
+            "default": "-"
+        }],
+        "events": []
+    }
+}

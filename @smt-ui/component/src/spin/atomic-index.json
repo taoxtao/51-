@@ -1,0 +1,47 @@
+{
+    "name": "smt-spin",
+    "label": "加载",
+    "description": "加载组件，可用于全屏和半屏。用于展示加载状态，点击加载、正在加载、加载完成、重新加载四种状态。",
+    "codeSnap": "<smt-spin status='1'></smt-spin>",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-spin/smt-spin",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-spin/smt-spin",
+    "fragement": "swanide://fragment/25af44248f8aad73b64e274ead38d6151577191316430",
+    "demoCode": {
+        "s": "<smt-spin status=\"{{status}}\">\n</smt-spin>",
+        "js": "Page({\n    data: {\n        status: 1\n    }\n});",
+        "css": ""
+    },
+    "properties": {
+        "attributes": [
+            {
+                "name": "status",
+                "type": "Number",
+                "description": "加载状态配置",
+                "required": "是"
+            },
+            {
+                "name": "theme",
+                "type": "String",
+                "description": "主题配置，默认浅色；深色主题请指定dark",
+                "required": "否",
+                "default": ""
+            },
+            {
+                "name": "textConfig",
+                "type": "Array",
+                "description": "加载状态对应的文案",
+                "required": "否",
+                "default": "['点击加载更多', '正在加载...', '已经到底啦', '加载失败 点击重新加载']"
+            },
+            {
+                "name": "secureBottom",
+                "type": "Boolean",
+                "description": "默认兼容iPhoneX 及以上型号底部安全区，非全屏可关闭",
+                "required": "否",
+                "default": "true"
+            }
+        ],
+        "events": []
+    }
+}

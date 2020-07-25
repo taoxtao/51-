@@ -1,0 +1,84 @@
+{
+    "name": "smt-image-uploader",
+    "label": "图片上传器",
+    "description": "上传图片组件，支持大图、多图模式，可配置图片个数、大小限制等",
+    "codeSnap": "<smt-image-uploader picture-list={{['https://b.bdstatic.com/searchbox/icms/searchbox/img/ripple-init.gif','https://imgsa.baidu.com/news/q%3D100/sign=c57a83945bfbb2fb322b5c127f4b2043/9213b07eca80653890432fda99dda144ac34824a.jpg']}}></smt-image-uploader>",
+    "groups": "layout",
+    "autoReadme": true,
+    "demopath": "extensions/component/smt-image-uploader/smt-image-uploader",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-image-uploader/smt-image-uploader",
+    "fragement": "swanide://fragment/d05e46c6ee440831c1c56600dc7dd59d1587556647748",
+    "demoCode": {
+        "s": "<view class=\"wrap {{theme}}\">\n    <view class=\"card-panel\" s-for=\"item,index in list\">\n        <view class=\"mode-title\">\n            <view class=\"mode-title-line-left\"></view>\n            <view class=\"mode-title-text\">{{item.titleBar}}</view>\n            <view class=\"mode-title-line-right\"></view>\n        </view>\n        <view class=\"smt-card-area\">\n            <smt-image-uploader \n                picture-container-class=\"image-uploader-container\"\n                picture-item-class=\"image-uploader-item\"\n                theme=\"{{item.theme}}\"\n                data-index=\"{{index}}\"\n                bind:chooseimage=\"chooseImage\"\n                bind:delimage=\"delImage\"\n                picture-list=\"{{item.images}}\"\n                picture-limit=\"{{item.pictureLimit}}\"\n                picture-select-limit=\"{{item.pictureSelectLimit}}\"\n                showTips=\"true\"/>\n        </view>\n    </view>\n    <view class=\"smt-card-config\">\n        <view class=\"item-scroll\">\n            <text class=\"switch-text switch-text-before\">沉浸式主题</text>\n            <switch color=\"{{theme ==='dark' ? '#f5f5f5' : '#ddd'}}\" class=\"init-switch\" disabled=\"false\" bind:change=\"changeTheme\"></switch>\n        </view>\n    </view>\n</view>",
+        "js": "Page({\n    data: {\n        theme: '',\n        searchIconColor: '#999',\n        list: [\n            {\n                titleBar: '上传图片',\n                theme: 'default',\n                images: [],\n                pictureLimit: 9,\n                pictureSelectLimit: 9\n            },\n            {\n                titleBar: '上传证照',\n                theme: 'large',\n                images: [],\n                pictureLimit: 2,\n                pictureSelectLimit: 2\n            }\n        ]\n    },\n\n    /**\n     * 选择图片\n     *\n     * @param {Event} e 事件对象\n     * @param {Object} e.currentTarget.dataset 获取事件对象的数据\n     */\n    chooseImage(e) {\n        const {images, currentTarget} = e;\n        const index = currentTarget.dataset.index;\n        this.setData(`list.${index}.images`, images);\n    },\n\n    /**\n     * 删除图片\n     *\n     * @param {Event} e 事件对象\n     * @param {Object} e.currentTarget.dataset 获取事件对象的数据\n     */\n    delImage(e) {\n        const index = e.currentTarget.dataset.index;\n        this.setData(`list.${index}.images`,\n            this.data.list[index].images.filter(function (item, index) {\n                if (index !== e.index) {\n                    return item;\n                }\n            })\n        );\n    },\n\n    /**\n     * 切换主题\n     *\n     * @param {Event} e 事件对象\n     * @param {Object} e.detail 获取checked值\n     */\n    changeTheme(e) {\n        const checked = e.detail.checked;\n        this.setData({\n            theme: checked ? 'dark' : '',\n            searchIconColor: checked ? ' #a4c2ec' : '#999'\n        });\n        swan.nextTick(() => {\n            swan.setBackgroundColor({\n                backgroundColor: checked ? '#3670c2' : '#f5f5f5'\n            });\n        });\n    }\n});",
+        "css": ".wrap {\n    padding-top: .2rem;\n    background: #f5f5f5;\n}\n\n.wrap .smt-card-area {\n    margin: 25.362rpx 0 72.464rpx;\n    background: #fff;\n}\n\n.wrap .area-content {\n    height: 635.87rpx;\n}\n\n.wrap .init-switch {\n    vertical-align: middle;\n    margin: 28.986rpx 0;    \n}\n\n.wrap .switch-text-before {\n    font-size: 28.986rpx;\n    color: #333;\n    display: flex;\n    align-items: center;\n}\n\n.wrap .smt-card-config {\n    background: #fff;\n    overflow: hidden;\n}\n\n.wrap .item-logo {\n    display: inline-block;\n    width: 32.609rpx;\n    height: 32.609rpx;\n    margin: 34.005rpx 0;\n}\n\n.page-status-hover {\n    opacity: .2;\n}\n\n.wrap.dark {\n    background-color: #3670c2;\n}\n\n.wrap.dark .smt-card-config {\n    background-color: #4985da;\n}\n\n.dark .image-uploader-container {\n    background-color: #528fe6;\n}\n\n.dark .image-uploader-item {\n    border: 1px solid #7fa9e5;\n}\n\n.dark .image-uploader-container text {\n    color: rgba(255, 255, 255, .6);\n}\n\n.wrap.dark .switch-text-before {\n    color: #fff;\n    background: #4985da;\n}\n\n.wrap.dark .mode-title-line-left {\n    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);\n    opacity: .3;\n}\n\n.wrap.dark .mode-title-line-right {\n    background-image: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);\n    opacity: .3;\n}\n\n.wrap.dark .mode-title-text {\n    color: #fff;\n}\n\n.wrap.dark .swan-switch-input:after {\n    background: #38f;\n}",
+        "json": "{\n    \"navigationBarTitleText\": \"image-uploader\",\n    \"navigationStyle\": \"custom\",\n    \"usingComponents\": {\n        \"smt-image-uploader\": \"@smt-ui/component/src/image-uploader\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [
+            {
+                "name": "theme",
+                "type": "String",
+                "description": "主题：default为小图，large为大图模式",
+                "default": "default",
+                "required": "否"
+            },
+            {
+                "name": "pictureList",
+                "type": "Array",
+                "description": "i上传图片地址列表",
+                "default": "[]",
+                "required": "否"
+            },
+            {
+                "name": "pictureLimit",
+                "type": "Number",
+                "description": "上传图片个数上限",
+                "default": "9",
+                "required": "否"
+            },
+            {
+                "name": "showPreview",
+                "type": "Boolean",
+                "description": "是否支持预览",
+                "default": "false",
+                "required": "否"
+            },
+            {
+                "name": "showTips",
+                "type": "Boolean",
+                "description": "是否展示提示信息",
+                "default": "false",
+                "required": "否"
+            },
+            {
+                "name": "pictureSizeLimit",
+                "type": "Number",
+                "description": "单张图片大小限制",
+                "default": "1e7",
+                "required": "否"
+            },
+            {
+                "name": "pictureSelectLimit",
+                "type": "Number",
+                "description": "从本地相册中选择图片个数",
+                "default": "2",
+                "required": "否"
+            }
+        ],
+        "events": [{
+            "name": "binddelimage",
+            "type": "Event",
+            "description": "删除图片时触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindchooseimage",
+            "type": "Event",
+            "description": "选择图片时触发",
+            "required": "否",
+            "default": "-"
+        }]
+    }
+
+}

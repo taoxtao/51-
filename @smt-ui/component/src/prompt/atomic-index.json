@@ -1,0 +1,41 @@
+{
+    "name": "smt-prompt",
+    "label": "温馨提示",
+    "autoReadme": true,
+    "description": "温馨提示组件，可配置标题内容，提示内容，并可放置在页面的任何位置。",
+    "codeSnap": "<smt-prompt>\n    <view slot=\"title\">标题名称</view>\n    <view slot=\"content\">内容信息描述，支持多行信息展示，高度根据内容信息自适应</view>\n</smt-prompt>",
+    "fragement": "swanide://fragment/995f1c91b7a20ffc2cfae3ec4fe7c1eb1592380189860",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-prompt/smt-prompt",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-prompt/smt-prompt",
+    "demoCode": {
+        "s": "<view>\n    <smt-prompt content-class=\"prompt-content\">\n        <view slot=\"title\">标题名称</view>\n        <view slot=\"content\">\n            内容信息描述，支持多行信息展示，高度根据内容信息自适应<view class=\"content-herf\" bindtap=\"clkTextShow\">文字链接</view>\n        </view>\n    </smt-prompt>\n</view>",
+        "css": ".prompt-content {\n    font-size: 25.362rpx;\n    line-height: 1.5;\n    color: #999;\n}\n\n.prompt-content .content-herf {\n    color: #2772fb;\n    display: inline;\n}",
+        "js": "Page({\n\n    /**\n     * 文字链接点击事件\n     */\n    clkTextShow() {\n        swan.showToast({\n            title: '暂未配置链接',\n            icon: 'none'\n        });\n    }\n});",
+        "json": "{\n    \"navigationBarTitleText\": \"温馨提示\",\n    \"navigationStyle\": \"default\",\n    \"usingComponents\": {\n        \"smt-prompt\": \"@smt-ui/component/src/prompt\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "prompt-class",
+            "type": "String",
+            "description": "提供开发外部样式类，供开发者自定义组件样式，可通过此 class 改变提示框外层样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "title-class",
+            "type": "String",
+            "description": "提供开发外部样式类，供开发者自定义组件样式，可通过此 class 改变提示框标题样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "content-class",
+            "type": "String",
+            "description": "提供开发外部样式类，供开发者自定义组件样式，可通过此 class 改变提示框内容样式",
+            "required": "否",
+            "default": "-"
+        }],
+        "events": []
+    }
+}

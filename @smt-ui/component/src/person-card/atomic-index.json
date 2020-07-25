@@ -1,0 +1,76 @@
+{
+    "name": "smt-person-card",
+    "label": "个人信息卡",
+    "autoReadme": true,
+    "description": "个人信息卡组件，可配置卡片类型、卡片背景图、卡片名称、卡片信息功能，适用于信息展示，并可放置在页面的任何位置。",
+    "codeSnap": "<smt-person-card name=\"主标题\" type=\"normal\" />\n",
+    "fragement": "swanide://fragment/1faaa5b289ad31806948f8a40e4805b81592381003094",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-person-card/smt-person-card",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-person-card/smt-person-card",
+    "demoCode": {
+        "s": "<view class=\"wrap\">\n    <view class=\"content\">\n        <view class=\"card-panel\" s-for=\"item, index in personList\">\n            <view class=\"comp-wrap\">\n                <smt-person-card\n                    name=\"主标题\"\n                    type=\"normal\"\n                    info-list=\"{{item.personCard}}\"\n                    bg-img=\"{{item.imgSrc}}\"\n                />\n            </view>\n        </view>\n    </view>\n</view>",
+        "css": ".wrap {\n    height: 100vh;\n}\n\n.smt-card-area {\n    margin-top: 25.36rpx;\n}\n\n.card-panel:first-child {\n    margin-top: 0;\n}\n\n.card-area {\n    display: flex;\n    margin: 90.58rpx 0 0;\n    padding: 28.382rpx 30.797rpx;\n    border: none;\n    border-radius: 0;\n    transition: background-color 200ms linear;\n    align-items: center;\n    justify-content: space-between;\n}\n\n.comp-wrap {\n    background-color: #fff;\n    margin-top: 25.362rpx;\n    padding: 27.174rpx 30.797rpx;\n}",
+        "js": "Page({\n    data: {\n        personList: [\n            {\n                title: '默认展示',\n                imgSrc: 'https://b.bdstatic.com/searchbox/icms/searchbox/img/person-default.png',\n                personCard: [\n                    {\n                        title: '标题',\n                        desc: '内容文本'\n                    },\n                    {\n                        title: '标题名称',\n                        desc: '内容展示长文本示例'\n                    }\n                ]\n            },\n            {\n                title: '带背景展示',\n                imgSrc: 'https://b.bdstatic.com/searchbox/icms/searchbox/img/person-use.png',\n                personCard: [\n                    {\n                        title: '标题名称',\n                        desc: '内容展示长文本多文字示例'\n                    },\n                    {\n                        title: '文本标题',\n                        desc: '内容展示长文本多文字示例'\n                    },\n                    {\n                        title: '标题名称',\n                        desc: '内容展示长文本多文字示例'\n                    }\n                ]\n            }\n        ]\n    }\n});",
+        "json": "{\n    \"navigationBarTitleText\": \"个人信息卡\",\n    \"navigationStyle\": \"default\",\n    \"usingComponents\": {\n        \"smt-person-card\": \"@smt-ui/component/src/person-card\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "type",
+            "type": "String",
+            "description": "信息卡类型：noraml：默认普通模式，big：大图模式",
+            "required": "否",
+            "default": "noraml"
+        },
+        {
+            "name": "bgImg",
+            "type": "String",
+            "description": "卡片背景图",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "name",
+            "type": "String",
+            "description": "卡片名称",
+            "required": "是",
+            "default": "-"
+        },
+        {
+            "name": "infoList",
+            "type": "Array",
+            "description": "卡片信息，最多可配置 5 条，超过不会显示",
+            "required": "是",
+            "default": "-"
+        },
+        {
+            "name": "person-card",
+            "type": "String",
+            "description": "提供卡片的扩展样式类，供开发者自定义组件样式，可通过此 class 改变卡片的样式，如背景颜色，背景图的展现方式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "info-name",
+            "type": "String",
+            "description": "提供卡片的扩展样式类，供开发者自定义组件样式，可通过此 class 改变卡片 name 的的样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "info-title",
+            "type": "String",
+            "description": "提供卡片的扩展样式类，供开发者自定义组件样式，可通过此 class 改变卡片信息的左侧标题样式",
+            "required": "否",
+            "default": "-"
+        },
+        {
+            "name": "info-desc",
+            "type": "String",
+            "description": "提供卡片的扩展样式类，供开发者自定义组件样式，可通过此 class 改变卡片信息的右边内容样式",
+            "required": "否",
+            "default": "-"
+        }],
+        "events": []
+    }
+}

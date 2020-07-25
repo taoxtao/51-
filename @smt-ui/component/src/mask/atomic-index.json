@@ -1,0 +1,38 @@
+{
+    "name": "smt-mask",
+    "label": "关注引导蒙层",
+    "description": "关注引导蒙层组件。支持使用默认顶部导航的页面或者自定义顶部导航的页面。",
+    "codeSnap": "<smt-mask name=\"AI分诊助手\" icon=\"https:\/\/b.bdstatic.com\/miniapp\/images\/swan_ui\/fragment/AI分诊.png\" is-custom \/>",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-mask/smt-mask",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-mask/smt-mask",
+    "demoCode": {
+        "s": "<view><smt-mask name=\"示例小程序\" icon=\"https:\/\/b.bdstatic.com\/searchbox\/mappconsole\/image\/20180502\/1525250801121271.png\"\/><\/view>"
+    },
+    "fragement": "swanide://fragment/c8c74c0abb6a52f42e5c52e279c21c081585047196086",
+    "properties": {
+        "attributes": [
+            {
+                "name": "name",
+                "type": "String",
+                "description": "待关注的小程序名，一般是当前小程序名。",
+                "required": "否",
+                "default": "小程序名称"
+            },
+            {
+                "name": "icon",
+                "type": "String",
+                "description": "待关注的小程序 logo 地址，一般是当前小程序的 logo 地址。",
+                "required": "否",
+                "default": "-"
+            },
+            {
+                "name": "is-custom",
+                "type": "Boolean",
+                "description": "是否是自定义顶部导航的页面，即.json 文件中是否设置了 isCustom: true ，如果设置了，需要将此选项置为 true。",
+                "required": "否",
+                "default": "false"
+            }
+        ]
+    }
+}

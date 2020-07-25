@@ -1,0 +1,112 @@
+{
+    "name": "smt-search-bar",
+    "label": "自定义搜索框",
+    "description": "自定义搜索框，支持配置多种主题，搜索默认文案，容器样式等",
+    "codeSnap": "<smt-search-bar></smt-search-bar>",
+    "fragement": "swanide://fragment/2b0d6221d42399bdab724ac54198b9851587900957820",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-search-bar/smt-search-bar",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-search-bar/smt-search-bar",
+    "demoCode": {
+        "s": "<view class=\"wrap {{theme}}\">\n    <view class=\"card-panel\" s-for=\"item,index in list\">\n        <view class=\"mode-title\">\n            <view class=\"mode-title-line-left\"></view>\n            <view class=\"mode-title-text\">{{item.titleBar}}</view>\n            <view class=\"mode-title-line-right\"></view>\n        </view>\n        <view class=\"smt-card-area\">\n            <smt-search-bar class=\"area-content\"\n                searchIconColor=\"{{searchIconColor}}\"\n                search-bar-class=\"{{item.theme}}-external-container\"\n                search-bar-content-class=\"{{item.theme}}-external-content\"\n                search-icon-class=\"{{item.theme}}-external-icon\"\n                search-input-class=\"external-search-input\"\n                search-text-class=\"external-search-text\"\n                placeholder-style=\"{{placeholderStyle}}\"\n                theme=\"{{item.theme}}\"/>\n        </view>\n    </view>\n    <view class=\"smt-card-config\">\n        <view class=\"item-scroll border-bottom\">\n            <text class=\"switch-text switch-text-before\">沉浸式主题</text>\n            <switch color=\"{{theme ==='dark' ? '#f5f5f5' : '#ddd'}}\" class=\"init-switch\" disabled=\"false\" bind:change=\"changeTheme\"></switch>\n        </view>\n    </view>\n</view>",
+        "js": "Page({\n    data: {\n        theme: '',\n        placeholderStyle: '',\n        searchIconColor: '#999',\n        list: [\n            {\n                titleBar: '搜索框填充样式1',\n                theme: 'default'\n            },\n            {\n                titleBar: '搜索框填充样式2',\n                theme: 'white'\n            },\n            {\n                titleBar: '搜索框描边样式',\n                theme: 'border'\n            }\n        ]\n    },\n\n    /**\n     * 切换主题\n     *\n     * @param {Event} e 事件对象\n     * @param {Object} e.detail 获取checked值\n     */\n    changeTheme(e) {\n        const checked = e.detail.checked;\n\n        this.setData({\n            searchIconColor: checked ? 'rgba(255,255,255,.6)' : '#999',\n            placeholderStyle: checked ? 'color: #8eb4e2;' : '',\n            theme: checked ? 'dark' : ''\n        });\n\n        swan.nextTick(() => {\n            swan.setBackgroundColor({\n                backgroundColor: checked ? '#3670c2' : '#f5f5f5'\n            });\n        });\n    }\n});\n\n",
+        "css": ".wrap {\n    padding-top: .2rem;\n    background: #f5f5f5;\n}\n\n.wrap .smt-card-area {\n    margin: 25.36rpx 0 72.46rpx;\n    background: #fff;\n}\n\n.wrap .init-switch {\n    vertical-align: middle;\n    margin: 28.986rpx 0;    \n}\n\n.wrap .switch-text-before {\n    font-size: 28.986rpx;\n    color: #333;\n    display: flex;\n    align-items: center;\n}\n\n.wrap .smt-card-config {\n    background: #fff;\n    overflow: hidden;\n}\n\n.wrap .item-logo {\n    display: inline-block;\n    width: 32.609rpx;\n    height: 32.609rpx;\n    margin: 34.005rpx 0;\n}\n\n.page-status-hover {\n    opacity: .2;\n}\n\n.wrap.dark {\n    background-color: #3670c2;\n}\n\n.wrap.dark .smt-card-config,\n.wrap.dark .border-external-container,\n.wrap.dark .white-external-container,\n.wrap.dark .default-external-content,\n.wrap.dark .border-external-content {\n    background-color: #4985da;\n}\n\n.wrap.dark .border-external-content {\n    border: 1px solid rgba(255, 255, 255, .3);\n}\n\n.wrap.dark .switch-text-before {\n    color: #fff;\n    background: #4985da;\n}\n\n.wrap.dark .mode-title-line-left {\n    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);\n    opacity: .3;\n}\n\n.wrap.dark .mode-title-line-right {\n    background-image: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);\n    opacity: .3;\n}\n\n.wrap.dark .mode-title-text,\n.wrap.dark .external-search-input {\n    color: #fff;\n}\n\n.wrap.dark .border-bottom:after {\n    transform: scaleY(.5);\n    background: #73a5eb;\n}\n\n.wrap.dark .swan-switch-input:after {\n    background: #38f;\n}\n\n\n.wrap.dark .default-external-container,\n.wrap.dark .white-external-content {\n    background: #1d69c6;\n    color: #fff;\n}\n\n.wrap.dark .external-search-text {\n    color: #a4c2ec !important;\n}\n",
+        "json": "{\n    \"navigationBarTitleText\": \"search-bar\",\n    \"usingComponents\": {\n        \"smt-search-bar\": \"@smt-ui/component/src/search-bar\"\n    },\n    \"navigationStyle\": \"custom\"\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "theme",
+            "type": "String",
+            "description": "搜索框主题样式：default为搜索框灰色填充主题，border为搜索框描边主题，white为搜索框白色填充主题，transparent为搜索框透明主题",
+            "required": "否",
+            "default": "default"
+        },
+        {
+            "name": "placeholder",
+            "type": "String",
+            "description": "输入内容默认文案",
+            "required": "否",
+            "default": "搜索关键词"
+        },
+        {
+            "name": "placeholderStyle",
+            "type": "String",
+            "description": "输入内容默认文案的样式",
+            "required": "否",
+            "default": ""
+        },
+        {
+            "name": "searchIconColor",
+            "type": "String",
+            "description": "搜索icon的颜色",
+            "required": "否",
+            "default": "#999"
+        },
+        {
+            "name": "confirmType",
+            "type": "String",
+            "description": "键盘右下角按钮文字",
+            "required": "否",
+            "default": "search"
+        },
+        {
+            "name": "value",
+            "type": "String",
+            "description": "搜索框内容",
+            "required": "否",
+            "default": ""
+        },
+        {
+            "name": "focus",
+            "type": "Boolean",
+            "description": "聚焦，调起输入键盘",
+            "required": "否",
+            "default": false
+        },
+        {
+            "name": "containerStyle",
+            "type": "Object",
+            "description": "最外层容器的样式，但theme权重大于该样式",
+            "required": "否",
+            "default": "{'background': '#f4f5f6', 'opacity': 1}"
+        },
+        {
+            "name": "contentStyle",
+            "type": "Object",
+            "description": "内层搜索容器的样式",
+            "required": "否",
+            "default": "{'width': 688.41,'minWidth': 218}"
+        }],
+        "events": [{
+            "name": "bindinput",
+            "type": "Event",
+            "description": "输入时触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindfocus",
+            "type": "Event",
+            "description": "聚焦时触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindclear",
+            "type": "Event",
+            "description": "点击清除按钮时触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindblur",
+            "type": "Event",
+            "description": "失焦时触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindsearch",
+            "type": "Event",
+            "description": "搜索时触发",
+            "required": "否",
+            "default": "-"
+        }]
+    }
+}

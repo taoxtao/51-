@@ -1,0 +1,88 @@
+{
+    "name": "smt-calendar",
+    "label": "日历",
+    "autoReadme": true,
+    "description": "日历组件，可配置选中日期、日历数据、星期文案，适用于信息输入，并可放置在页面的任何位置。",
+    "codeSnap": "<smt-calendar\n    class=\"calendar\"\n    range=\"{{[{name: '2020-06', value: [{day: '2020-06-01', state: 1}]}]}}\"\n    value=\"{{{day: '2020-06-01', state: 1}}}\"\n>",
+    "fragement": "swanide://fragment/72c1ced6ce251564157dd25d75ba22921592382255754",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-calendar/smt-calendar",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-calendar/smt-calendar",
+    "demoCode": {
+        "s": "<view class=\"wrap\">\n    <view class=\"content\">\n            <view class=\"comp-wrap\">\n                <smt-calendar\n                    class=\"calendar\"\n                    range=\"{{range}}\"\n                    value=\"{{value}}\"\n                    bind:dayclick=\"dayClick\"\n                    showOptionPanel=\"{{false}}\"\n                >\n                </smt-calendar>\n            </view>\n        </view>\n        <view class=\"card-panel\">\n            <view class=\"comp-wrap\">\n                <smt-calendar\n                    class=\"calendar\"\n                    range=\"{{range}}\"\n                    value=\"{{allDayValue}}\"\n                    bind:dayclick=\"allDayClick\"\n                >\n                </smt-calendar>\n            </view>\n        </view>\n    </view>\n</view>",
+        "css": ".wrap {\n    background-color: #f5f5f5;\n    height: 100vh;\n}\n\n.content {\n    padding-top: 0.2rem;\n}\n\n.smt-card-area {\n    margin-top: 25.36rpx;\n    background-color: #fff;\n}\n\n.card-panel {\n    margin-top: 72.46rpx;\n}\n\n.card-panel:first-child {\n    margin-top: 0;\n}\n\n.card-area {\n    display: flex;\n    margin: 90.58rpx 0 0;\n    padding: 28.382rpx 30.797rpx;\n    border: none;\n    border-radius: 0;\n    transition: background-color 200ms linear;\n    align-items: center;\n    justify-content: space-between;\n}\n\n.comp-wrap {\n    background-color: #fff;\n    margin-top: 25.362rpx;\n    padding: 27.174rpx 0;\n}",
+        "js": "Page({\n    data: {\n        range: [\n            {\n                name: '2020-06',\n                value: [\n                    {\n                        day: '2020-06-01',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-02',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-03',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-04',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-05',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-06',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-07',\n                        state: 0\n                    },\n                    {\n                        day: '2020-06-08',\n                        state: 0\n                    },\n                    {\n                        day: '2020-06-09',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-10',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-11',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-12',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-13',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-14',\n                        state: 0\n                    },\n                    {\n                        day: '2020-06-15',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-16',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-17',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-18',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-19',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-20',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-21',\n                        state: 0\n                    },\n                    {\n                        day: '2020-06-22',\n                        state: 0\n                    },\n                    {\n                        day: '2020-06-23',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-24',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-25',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-26',\n                        state: 1\n                    },\n                    {\n                        day: '2020-06-27',\n                        state: 1\n                    }\n                ]\n            },\n            {\n                name: '2020-07',\n                value: [\n                    {\n                        day: '2020-07-01',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-02',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-03',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-04',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-05',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-06',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-07',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-08',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-09',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-10',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-11',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-12',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-13',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-14',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-15',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-16',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-17',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-18',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-19',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-20',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-21',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-22',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-23',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-24',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-25',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-26',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-27',\n                        state: 0\n                    },\n                    {\n                        day: '2020-07-28',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-29',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-30',\n                        state: 1\n                    },\n                    {\n                        day: '2020-07-31',\n                        state: 1\n                    }\n                ]\n            }\n        ],\n        value: {day: '2020-06-15', state: 1},\n        allDayValue: {day: '2020-07-29', state: 1},\n        weekText: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']\n    },\n\n    /**\n     * 单月日历点击\n     *\n     * @param {Object} param 点击事件回调\n     * @param {Object} param.value day 状态对象\n     */\n    dayClick({value}) {\n        if (value.state) {\n            this.setData({\n                value\n            });\n        }\n    },\n\n    /**\n     * 全部日历点击\n     *\n     * @param {Object} param 点击事件回调\n     * @param {Object} param.value day 状态对象\n     */\n    allDayClick({value}) {\n        if (value.state) {\n            this.setData({\n                allDayValue: value\n            });\n        }\n    }\n});",
+        "json": "{\n    \"navigationBarTitleText\": \"日历\",\n    \"navigationStyle\": \"default\",\n    \"usingComponents\": {\n        \"smt-calendar\": \"@smt-ui/component/src/calendar\"\n    }\n}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "value",
+            "type": "Object",
+            "description": "默认选中日期，value 示例：{day: '2020-06-15', state: 1}，详细代码请阅读代码示例",
+            "required": "是",
+            "default": "-"
+        },
+        {
+            "name": "range",
+            "type": "Array",
+            "description": "日历数据，range 示例：{name: '2020-06', value: [{day: '2020-06-01', state: 1}]}，详细代码请阅读代码示例",
+            "required": "是",
+            "default": "-"
+        },
+        {
+            "name": "separation",
+            "type": "String",
+            "description": "连接年月日的符号",
+            "required": "否",
+            "default": "'-'"
+        },
+        {
+            "name": "repeatable",
+            "type": "Boolean",
+            "description": "选中的日期是否可以多次点击",
+            "required": "否",
+            "default": "false"
+        },
+        {
+            "name": "disabled",
+            "type": "Boolean",
+            "description": "是否禁用该组件",
+            "required": "否",
+            "default": "false"
+        },
+        {
+            "name": "allDayValid",
+            "type": "Boolean",
+            "description": "所有日期是否可选",
+            "required": "否",
+            "default": "false"
+        },
+        {
+            "name": "weekText",
+            "type": "Array",
+            "description": "星期默认文案",
+            "required": "否",
+            "default": "['日', '一', '二', '三', '四', '五', '六']"
+        },
+        {
+            "name": "showOptionPanel",
+            "type": "Boolean",
+            "description": "是否展示月份面板",
+            "required": "否",
+            "default": "false"
+        }],
+        "events": [{
+            "name": "binddayclick",
+            "type": "Event",
+            "description": "点击日历中的某个日期时触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindchange",
+            "type": "Event",
+            "description": "改变选中的日期时触发",
+            "required": "否",
+            "default": "-"
+        }]
+    }
+}

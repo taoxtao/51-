@@ -1,0 +1,113 @@
+{
+    "name": "smt-textarea",
+    "label": "自定义多行输入框",
+    "description": "多行输入框，支持白色主题（默认）、 边框主题和深色模式主题，可配置字符限制、错误提示方式等",
+    "codeSnap": "<smt-textarea></smt-textarea>",
+    "fragement": "swanide://fragment/92cabcc9b9a53f18dfb7b3a9fe8252181587899191806",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-textarea/smt-textarea",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-textarea/smt-textarea",
+    "demoCode": {
+        "s": "<view class=\"wrap {{theme}}\">\n    <view class=\"card-panel\" s-for=\"item,index in list\">\n        <view class=\"mode-title\">\n            <view class=\"mode-title-line-left\"></view>\n            <view class=\"mode-title-text\">{{item.titleBar}}</view>\n            <view class=\"mode-title-line-right\"></view>\n        </view>\n        <view class=\"smt-card-area {{platform}}-card-area\">\n            <smt-textarea class=\"area-content {{item.theme}}-area-content {{item.autoHeight ? 'auto-height' : ''}}\"\n                theme=\"{{item.theme}}\"\n                placeholder=\"{{item.placeholder}}\"\n                placeholder-style=\"{{placeholderStyle}}\"\n                autoHeight=\"{{item.autoHeight}}\"\n                promptType=\"{{item.promptType}}\"\n                width=\"{{item.width}}\"\n                textarea-class=\"external-textarea-container\"\n                textarea-content-class=\"external-textarea-content\"\n                textarea-input-class=\"external-textarea-input\"\n                textarea-button-class=\"external-textarea-button\"/>\n        </view>\n    </view>\n    <view class=\"smt-card-config\">  \n        <view class=\"item-scroll\">\n            <text class=\"switch-text switch-text-before\">沉浸式主题</text>\n            <switch color=\"{{theme ==='dark' ? '#f5f5f5' : '#ddd'}}\" class=\"init-switch\" disabled=\"false\" bind:change=\"changeTheme\"></switch>\n        </view>\n    </view>\n</view>",
+        "json": "{\n    \"navigationBarTitleText\": \"textarea\",\n    \"usingComponents\": {\n        \"smt-textarea\": \"@smt-ui/component/src/textarea\"\n    },\n    \"navigationStyle\": \"custom\"\n}",
+        "css": ".wrap {\n    padding-top: .2rem;\n    background: #f5f5f5;\n}\n\n.wrap .smt-card-area {\n    margin: 25.362rpx 0 72.464rpx;\n    background: #fff;\n}\n\n.wrap .default-area-content .external-textarea-container {\n    height: 202.9rpx;\n}\n\n.wrap .default-area-content.auto-height .external-textarea-container {\n    height: auto;\n    min-height: 202.9rpx;\n    overflow: hidden;\n}\n\n.ios-card-area .default-area-content.auto-height .external-textarea-content {\n    padding-top: 0;\n    margin-top: -25rpx;\n} \n\n.wrap .border-area-content .external-textarea-container {\n    height: 279.59rpx;\n}\n\n.wrap .init-switch {\n    vertical-align: middle;\n    margin: 28.986rpx 0;    \n}\n\n.wrap .switch-text-before {\n    font-size: 28.986rpx;\n    color: #333;\n    display: flex;\n    align-items: center;\n}\n\n.wrap .smt-card-config {\n    background: #fff;\n    overflow: hidden;\n}\n\n.wrap .item-logo {\n    display: inline-block;\n    width: 32.609rpx;\n    height: 32.609rpx;\n    margin: 34.005rpx 0;\n}\n\n.page-status-hover {\n    opacity: .2;\n}\n\n.wrap.dark {\n    background-color: #3670c2;\n}\n\n.wrap.dark .smt-card-config,\n.wrap.dark .external-textarea-container,\n.wrap.dark .external-textarea-input {\n    background-color: #4985da;\n    color: #fff;\n}\n\n.wrap.dark .border-area-content .external-textarea-content {\n    border: 1px solid #7fa9e5;\n}\n\n.wrap.dark .external-textarea-button {\n    background: #6d9de1;\n    color: #fff;\n}\n\n.wrap.dark .switch-text-before {\n    color: #fff;\n    background: #4985da;\n}\n\n.wrap.dark .mode-title-line-left {\n    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);\n    opacity: .3;\n}\n\n.wrap.dark .mode-title-line-right {\n    background-image: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);\n    opacity: .3;\n}\n\n.wrap.dark .mode-title-text {\n    color: #fff;\n}\n\n.wrap.dark .swan-switch-input:after {\n    background: #38f;\n}",
+        "js": "Page({\n    data: {\n        platform: swan.getSystemInfoSync().platform,\n        theme: '',\n        placeholderStyle: 'color: #ccc;',\n        list: [\n            {\n                titleBar: '输入区高度固定',\n                theme: 'default',\n                placeholder: '输入区高度固定，超过输入高度出现滚动条'\n            },\n            {\n                titleBar: '输入区高度适应',\n                theme: 'default',\n                placeholder: '输入区高度自适应，超过输入高度出现滚动条',\n                autoHeight: true\n            },\n            {\n                titleBar: '输入区宽度自定义',\n                placeholder: '输入区宽度自定义，超过输入高度出现滚动条',\n                theme: 'border',\n                width: '580rpx'\n            }\n        ]\n    },\n\n    /**\n     * 切换主题\n     *\n     * @param {Event} e 事件对象\n     * @param {Object} e.detail 获取checked值\n     */\n    changeTheme(e) {\n        const checked = e.detail.checked;\n\n        this.setData({\n            theme: checked ? 'dark' : '',\n            placeholderStyle: checked ? ' color: #b6cef0;' : 'color: #ccc;'\n        });\n\n        swan.nextTick(() => {\n            swan.setBackgroundColor({\n                backgroundColor: checked ? '#3670c2' : '#f5f5f5'\n            });\n        });\n    }\n});\n\n"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "theme",
+            "type": "String",
+            "description": "多行输入框主题：default: 默认白色主题，border: 边框主题，dark: 深色模式主题",
+            "required": "否",
+            "default": "default"
+        },
+        {
+            "name": "placeholder",
+            "type": "String",
+            "description": "输入内容默认文案",
+            "required": "否",
+            "default": "请输入内容"
+        },
+        {
+            "name": "placeholderStyle",
+            "type": "String",
+            "description": "输入内容默认文案的样式",
+            "required": "否",
+            "default": ""
+        },
+        {
+            "name": "contentLimit",
+            "type": "Number",
+            "description": "输入内容长度限制",
+            "required": "否",
+            "default": 120
+        },
+        {
+            "name": "width",
+            "type": "String",
+            "description": "输入框宽度",
+            "required": "否",
+            "default": "auto"
+        },
+        {
+            "name": "autoHeight",
+            "type": "Boolean",
+            "description": "输入框高度是否自适应",
+            "required": "否",
+            "default": false
+        },
+        {
+            "name": "promptType",
+            "type": "String",
+            "description": "输入超限提示类型: 1.text:框下文字提示; 2.toast:toast提示超限; 3.none:不提示",
+            "required": "否",
+            "default": "toast"
+        },
+        {
+            "name": "tipsEdge",
+            "type": "Number",
+            "description": "promptType为text时，出现提示时的剩余可输入字符个数",
+            "required": "否",
+            "default": 20
+        },
+        {
+            "name": "toastText",
+            "type": "String",
+            "description": "promptType为toast时，提示文案内容",
+            "required": "否",
+            "default": "超出字数限制"
+        },
+        {
+            "name": "submitText",
+            "type": "String",
+            "description": "发布按钮的文字内容",
+            "required": "否",
+            "default": "发表"
+        }],
+        "events": [{
+            "name": "bindinput",
+            "type": "Event",
+            "description": "输入时触发事件",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindconfirm",
+            "type": "Event",
+            "description": "键盘点击确认触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindblur",
+            "type": "Event",
+            "description": "失焦时触发",
+            "required": "否",
+            "default": "-"
+        }, {
+            "name": "bindsubmit",
+            "type": "Event",
+            "description": "发表成功失触发",
+            "required": "否",
+            "default": "-"
+        }]
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "name": "smt-feed-item",
+    "label": "信息流子项",
+    "description": "信息流子项：包括左文右图、纯文本、上文下图、多图及视频模式。",
+    "codeSnap": "<smt-feed-item theme='default' status='0'></smt-feed-item>",
+    "groups": "layout",
+    "demopath": "extensions/component/smt-feed-item/smt-feed-item",
+    "webUrl": "https://qft12m.smartapps.cn/extensions/component/smt-feed-item/smt-feed-item",
+    "fragement": "swanide://fragment/afebdafc13cda2201207a3d6721577481577175550244",
+    "demoCode": {
+        "s": "<view>\r\n\t<smt-feed-item theme='default' content='{{feedItem}}' video='{{video}}' status='0' smt-feed-item-wrapper='custom-feed-item' bindfeeditemtap='handleTap'>\r\n\t</smt-feed-item>\r\n</view>",
+        "js": "Page({\r\n\tdata: {\r\n\t\tfeedItem: {\r\n\t\t\ttitle: '宠物自己在家时, 如何帮助它度过孤独时光',\r\n\t\t\tinfoSource: '萌宠在家',\r\n\t\t\tcommentsNum: 11\r\n\t\t},\r\n\t\tvideo: {\r\n\t\t\tisVideo: true,\r\n\t\t\ttime: '05:00'\r\n\t\t}\r\n\t}\r\n});",
+        "css": ".custom-feed-item {color: #f00}"
+    },
+    "properties": {
+        "attributes": [{
+            "name": "theme",
+            "type": "string",
+            "description": "信息流子项的主题",
+            "required": "是",
+            "default": "default"
+        },
+        {
+            "name": "content",
+            "type": "Object",
+            "description": "信息流子项目的内容",
+            "required": "是",
+            "default": "{title: '标题',infoSource: '网易新闻',commentsNum: 2,images: []}"
+        },
+        {
+            "name": "video",
+            "type": "Object",
+            "description": "是否为视频和视频信息",
+            "required": "否",
+            "default": "{isVideo: true, time: '05:00'}"
+        }, {
+            "name": "status",
+            "type": "String",
+            "description": "阅读状态：0未读，1已读",
+            "required": "否",
+            "default": "0"
+        }],
+        "events": [
+            {
+                "name": "bindfeeditemtap",
+                "type": "Event",
+                "description": "点击feed-item之后的回调",
+                "required": "否",
+                "default": "-"
+            }
+        ]
+    }
+}
