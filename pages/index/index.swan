@@ -1,37 +1,70 @@
 <!-- index.swan -->
+<import-sjs src="../filter.sjs"  module="filter" />
 <view class="container">
-<view class="nav-title" style="margin-top:{{rightMenuInfo.top}}px;height:{{rightMenuInfo.height}}px;line-height:{{rightMenuInfo.height}}px;">51看图</view>
+	<view class="nav-title"
+		style="margin-top:{{rightMenuInfo.top}}px;height:{{rightMenuInfo.height}}px;line-height:{{rightMenuInfo.height}}px;">
+		51看图</view>
 	<view class="search">
-		<smt-search-bar class="area-content" searchIconColor="{{searchIconColor}}"
+		<smt-search-bar class="area-content" 
+        bindsearch="search"
+        searchIconColor="{{searchIconColor}}"
 			search-bar-class="{{theme}}-external-container" search-bar-content-class="{{theme}}-external-content"
 			search-icon-class="{{theme}}-external-icon" search-input-class="external-search-input"
-			search-text-class="external-search-text" placeholder-style="{{placeholderStyle}}" theme="{{theme}}" />
+			
+value="{{inputValue}}"   
+bindinput="inputValue"         search-text-class="external-search-text" placeholder-style="{{placeholderStyle}}"
+theme="{{theme}}" />
 	</view>
+
 	<view class="content">
 		<view class="view-li" s-for="{{lists}}" s-key="item.id">
-			<image class="img"  mode="widthFix" data-index="{{index}}" bindtap="viewImgs" lazy-load  
-				 src="{{item.img[0]}}" />
-                <text class="title">{{item.title}}</text>
+			<block s-for="imgs,idx in item.img">
+				<image class="img" s-if="{{idx<6}}"  bindtap="viewImgs" style="width:{{item.imgwh.img_w}};height:{{item.imgwh.img_h}};" image-menu-prevent="true" mode="aspectFill"
+					preview="false" data-index="{{index}}" data-idx="{{idx}}" bindload="imageLoad" binderror="imageError" lazy-load="true" src="{{imgs}}" />
+			</block>
+            <view class="title">{{item.anchor.slong}}</view>
+            <scroll-view class="topic" scroll-x='true' style="width: {{systeminfo.width}};px;">
+                <view s-if="{{item.tags.length>0}}" class="topic-view">
+                    <view data-id="{{tag}}" bindtap="showTag" s-for="tag in item.tags">#{{filter.tagName(tag,tags)}}</view>    
+                </view>
+            </scroll-view>
+			<view class="anchor-info">
+				<view class="anchor">
+					<image class="avatar" src="{{item.anchor.avator}}"></image>
+					<view class="anchor-middle">
+						<text class="anchor-name">{{item.anchor.name}}</tex>
+							<text class="slong">{{item.date}}</text>
+					</view>
+				</view>
+				<button open-type="share" data-index="{{index}}" class="share-icon">
+					<svg t="1595775534195" class="icon" viewBox="0 0 1024 1024" version="1.1"
+						xmlns="http://www.w3.org/2000/svg" p-id="3965" width="32" height="32">
+						<path
+							d="M512 263.111111m-56.888889 0a56.888889 56.888889 0 1 0 113.777778 0 56.888889 56.888889 0 1 0-113.777778 0Z"
+							fill="#666666" p-id="3966"></path>
+						<path
+							d="M512 507.733333m-56.888889 0a56.888889 56.888889 0 1 0 113.777778 0 56.888889 56.888889 0 1 0-113.777778 0Z"
+							fill="#666666" p-id="3967"></path>
+						<path
+							d="M512 752.355556m-56.888889 0a56.888889 56.888889 0 1 0 113.777778 0 56.888889 56.888889 0 1 0-113.777778 0Z"
+							fill="#666666" p-id="3968"></path>
+					</svg>
+				</button>
+			</view>
 		</view>
 	</view>
-    <view s-if="{{isShow}}" class="swiper-wrap">
-        <swiper 
-            class="swiper"
-            indicator-dots="{{indicatorDots}}"
-            indicator-color="white"
-            indicator-active-color="red"
-            autoplay="false"
-            current="{{swiperCurrent}}" 
-            bindchange="swiperChange"   
-            bindtap="hiddenShow"
-            circular="false">
-            <swiper-item s-for="{{imgs}}">
-                <image style="width:100%;"  mode="widthFix" src="{{item}}"/>
-            </swiper-item>
-        </swiper>
-        <view s-if="{{isIos}}" class="dots">
-        <view s-for="{{imgs}}" class="dot {{index == swiperCurrent ? ' active' : ''}}"></view>
-    </view>
-        </view>
-        
+    <view class="no-more" s-if="{{noMore}}">没有更多了</view>
+	<view s-if="{{isShow}}" class="swiper-wrap">
+		<swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="white" indicator-active-color="red"
+			autoplay="false" current="{{swiperCurrent}}" bindchange="swiperChange" bindtap="hiddenShow"
+			circular="false">
+			<swiper-item s-for="{{imgs}}">
+				<image style="width:100%;" binderror="imageError" bindload="imageLoad" mode="widthFix" src="{{item}}" />
+			</swiper-item>
+		</swiper>
+		<view s-if="{{isIos}}" class="dots">
+			<view s-for="{{imgs}}" class="dot {{index == swiperCurrent ? ' active' : ''}}"></view>
+		</view>
+	</view>
+
 </view>

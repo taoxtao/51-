@@ -27,9 +27,10 @@ Page({
         rightMenuInfo: null,
         noMore:false,
         inputValue:null,
+        tag:null,
         tags:[],
         newTags:[],
-        listsIndex:0,
+        tagid:null,
     },
     onLoad() {
         var that = this;
@@ -44,16 +45,19 @@ Page({
                     systeminfo: res,
                     isIos: isIos,
                     rightMenuInfo: rightMenuInfo,
-                    imgW:(res.windowWidth-2)/3
+                    imgW:res.windowWidth/2-6
                 })
             }
         });
-        that.getTag();
+        console.log('tagid',that.options.id);
+        that.setData({
+            tagid:that.options.id
+        })
+        // that.getTag();
+        that.getTagById(that.options.id);
         that.getNews();
     },
     onShow() {
-        
-        // 设置pageinfo
         swan.setNavigationBarColor({
             frontColor: '#000000',
             backgroundColor: '#fff000',
@@ -94,7 +98,6 @@ Page({
     viewImgs(e) {
         console.log('viewImgs', e);
         var imgs = this.data.lists[e.currentTarget.dataset.index].img;
-        var idx = e.currentTarget.dataset.idx || 0;
         var imgss = [];
         var i = 0;
         for (i; i < imgs.length; i++) {
@@ -104,15 +107,14 @@ Page({
         this.setData({
             isShow: true,
             listsIndex:e.currentTarget.dataset.index,
-            imgs: imgss,
-            swiperCurrent:idx
+            imgs: imgss
         })
     },
     hiddenShow() {
         console.log('hiddenShow');
         this.setData({
             isShow: false,
-            swiperCurrent:0,
+            swiperCurrent: 0,
         })
     },
     imageLoad(e){
@@ -142,6 +144,9 @@ Page({
         }
         if(that.data.inputValue!=null){
                 data.search = that.data.inputValue
+        }
+        if(that.data.tagid!=null){
+            data.tags = that.data.tagid
         }
         var url = app.siteInfo.newsurl + "wp-json/wp/v2/posts";
         swan.request({
@@ -178,7 +183,7 @@ Page({
     },
     getTag(){
         var that = this;
-        var data = {per_page:100};
+        var data = {};
         var url = app.siteInfo.newsurl + "wp-json/wp/v2/tags";
         swan.request({
             url: url,
@@ -190,20 +195,31 @@ Page({
                  that.setData({
                      tags:res.data,
                  });
-                
-                
             },
             fail:res=>{
                 console.log("getTag",res);
             }
         });
     },
-    showTag(e){
+    getTagById(id){
         var that = this;
-        var id = e.target.dataset.id;
-        swan.navigateTo({
-            url: '/pages/tag/tag?id='+ id
-        });
+        var data = {};
+        var url = app.siteInfo.newsurl + "wp-json/wp/v2/tags/"+id;
+        swan.request({
+            url: url,
+            data:data,
+            method:'GET',
+            dataType:'json',
+            success:res=>{
+                console.log("getTag",res);
+                 that.setData({
+                     tag:res.data,
+                 });                
+            },
+            fail:res=>{
+                console.log("getTag",res);
+            }
+        });                
     },
     showImg(news) {
         var that = this;
@@ -241,16 +257,10 @@ Page({
                         break;
                     case 2:
                         imgwh = {
-                            "img_w":'49.6%',
+                            "img_w":'49%',
                             "img_h":that.data.imgW*2+"px"
                         }
                         break;
-                        case 4:
-                            imgwh = {
-                                "img_w":'49.6%',
-                                "img_h":that.data.imgW+"px"
-                            }
-                            break;    
                     default:
                         imgwh = {
                             "img_w":that.data.imgW+"px",
@@ -281,7 +291,7 @@ Page({
             page: that.data.page,
             lists: that.data.lists.concat(lists)
         })
-        this.setPageInfo();
+        that.setPageInfo();
     },
 randomString(str) {
   
@@ -321,23 +331,22 @@ randomString(str) {
             title: data.title,
             content: data.title,
             imageUrl: data.img[idx],
-            path: '/pages/index/index'
+            path: '/pages/tag/tag?id='+this.options.id
         };
     },
     onPullDownRefresh(){
         this.search()
     },
-    setPageInfo(){
-        
+    setPageInfo(){        
         var that = this;
         var data = that.data.lists[0];
         swan.setPageInfo({
             // 页面标题
-            title: '51看图-好看的都在这里',
+            title: that.data.tag.name+'图片，就在-'+app.siteInfo.zh_name,
             // 页面关键字
-            keywords: '美女图,高清手机壁纸,发型图片,摄影作品,房屋装修效果图,热门明星图片,风景图片,性感美女图片、图片网',
+            keywords: that.data.tag.name+'壁纸,高清'+that.data.tag.name+'壁纸,'+that.data.tag.name+'桌面壁纸,高清'+that.data.tag.name+'桌面壁纸,图片头像，高清摄影,屏保图、手机桌面图',
             // 页面描述信息
-            description: '51看图是全国最大的图片信息分享平台，致力全网免费开放的图片浏览及分享,类目包括社会新闻,家居装修,搞笑动态图片,美女自拍图片,人体艺术写真,体育运动图片,高清桌面壁纸,明星明人等精选图片',
+            description: '热门高清'+that.data.tag.name+'图片尽在国内综合性图片网站-51看图',
             // 原始发布时间(年-月-日 时:分:秒 带有前导零）
             releaseDate: data.date,
             // 文章(内容)标题(适用于当前页面是图文、视频类的展示形式，文章标题需要准确标识当前文章的主要信息点；至少6个字，不可以全英文。)
@@ -364,6 +373,11 @@ randomString(str) {
             fail: res => {},
             // 接口调用结束的回调函数（调用成功、失败都会执行）
             complete: res => {}
+        });
+    },
+    goBack(){
+        swan.navigateBack({
+            
         });
     }
 })

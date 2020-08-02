@@ -5,21 +5,36 @@
             "enhance": true,
             "imgCompress": true
         },
-        "options": [],
+        "options": [
+            {
+                "extra": {
+                    "compileArgs": "--module cmd",
+                    "ext": {},
+                    "index": "pages/tag/tag",
+                    "query": "",
+                    "scene": {}
+                },
+                "id": 0,
+                "text": "pages/tag/tag"
+            }
+        ],
         "selected": -1
     },
     "host": "baiduboxapp",
     "preview": {
-        "packageId": 765546
+        "packageId": 776610
     },
     "projectname": "51看图",
+    "publish": {
+        "version": "1.0.1"
+    },
     "setting": {
-        "urlCheck": false
+        "urlCheck": true
     },
     "swan": {
         "baiduboxapp": {
-            "extensionJsVersion": "1.10.4",
-            "swanJsVersion": "3.150.11"
+            "extensionJsVersion": "100.14.255",
+            "swanJsVersion": "3.190.255-rc"
         }
     }
 }

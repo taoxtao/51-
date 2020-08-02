@@ -1,0 +1,62 @@
+<!-- index.swan -->
+<import-sjs src="../filter.sjs" module="filter" />
+<view class="container">
+    <view class="nav-top" style="margin-top:{{rightMenuInfo.top}}px;height:{{rightMenuInfo.height}}px;line-height:{{rightMenuInfo.height}}px;">
+        <view bindtap="goBack" class="back">
+            <svg t="1596291352941" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2081" width="32" height="32"><path d="M366.933333 488.533333l347.733334 347.733334c12.8 12.8 10.666667 34.133333-2.133334 44.8s-32 10.666667-44.8 0L322.133333 535.466667c-12.8-12.8-10.666667-34.133333 2.133334-44.8 10.666667-12.8 29.866667-12.8 42.666666-2.133334z" fill="#8a8a8a" p-id="2082"></path><path d="M712.533333 142.933333c12.8 12.8 12.8 32 0 44.8L366.933333 535.466667c-12.8 12.8-34.133333 10.666667-44.8-2.133334s-10.666667-32 0-44.8L667.733333 142.933333c12.8-12.8 32-12.8 44.8 0z" fill="#8a8a8a" p-id="2083"></path></svg>
+        </view>
+        <view class="nav-title" style="width:{{systeminfo.windowWidth-rightMenuInfo.width+10}}px;">
+        51看图</view>
+    </view>
+    
+    <!-- <view class="search">
+		<smt-search-bar class="area-content" 
+        bindsearch="search"
+        searchIconColor="{{searchIconColor}}"
+			search-bar-class="{{theme}}-external-container" search-bar-content-class="{{theme}}-external-content"
+			search-icon-class="{{theme}}-external-icon" search-input-class="external-search-input"
+			
+value="{{inputValue}}"   
+bindinput="inputValue"         search-text-class="external-search-text" placeholder-style="{{placeholderStyle}}"
+theme="{{theme}}" />
+    </view> -->
+    <view class="tag-name">#{{tag.name}}</view>
+    <view class="views">77232浏览 18506参与</view>
+    <view class="content">
+            <view class="flaot-left">
+                <block s-for="{{lists}}" s-key="item.id">
+                <view class="view-li" s-if="{{index%2==0}}" style="width: {{imgW}}px;">
+                    <image class="img" bindtap="viewImgs" data-index="{{index}}" data-idx="{{idx}}" image-menu-prevent="true" style="width: {{imgW}}px;"
+                        mode="widthFix" preview="false" data-index="{{index}}" bindload="imageLoad"
+                        binderror="imageError" lazy-load="true" src="{{item.img[0]}}" />
+                    <view class="title">{{item.anchor.slong}}</view>
+                </view>
+            </block>
+            </view>
+            <view class="flaot-right">
+                <block s-for="{{lists}}" s-key="item.id">
+                <view class="view-li" style="width: {{imgW}}px;" s-if="{{index%2!=0}}">
+                    <image class="img" bindtap="viewImgs" data-index="{{index}}" data-idx="{{idx}}" image-menu-prevent="true" style="width: {{imgW}}px;"
+                        mode="widthFix" preview="false" data-index="{{index}}" bindload="imageLoad"
+                        binderror="imageError" lazy-load="true" src="{{item.img[0]}}" />
+                    <view class="title">{{item.anchor.slong}}</view>
+                </view>
+            </block>
+            </view>
+        </block>
+    </view>
+    <view class="no-more" s-if="{{noMore}}">没有更多了</view>
+    <view s-if="{{isShow}}" class="swiper-wrap">
+        <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="white" indicator-active-color="red"
+            autoplay="false" current="{{swiperCurrent}}" bindchange="swiperChange" bindtap="hiddenShow"
+            circular="false">
+            <swiper-item s-for="{{imgs}}">
+                <image style="width:100%;" binderror="imageError" bindload="imageLoad" mode="widthFix" src="{{item}}" />
+            </swiper-item>
+        </swiper>
+        <view s-if="{{isIos}}" class="dots">
+            <view s-for="{{imgs}}" class="dot {{index == swiperCurrent ? ' active' : ''}}"></view>
+        </view>
+    </view>
+
+</view>
